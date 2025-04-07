@@ -39,7 +39,7 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss"         
             ],
             "scripts": [],
             "server": "src/main.server.ts",
@@ -110,5 +110,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "fb2547f0-0552-42da-8fad-2586a798822a"
   }
 }

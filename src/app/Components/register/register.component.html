@@ -1,0 +1,90 @@
+<div class="dashboard-container">
+  <header class="header">
+    <div class="logo-container">
+      <span class="material-symbols-outlined person-icon">person</span>
+      <span class="material-symbols-outlined money-icon">attach_money</span>
+    </div>
+    <div class="title-container">
+      <h2>EMPLOYEE</h2>
+      <h2 class="second-h2">PAYROLL</h2>
+    </div>
+  </header>
+
+  <div class="form-container">
+    <h3>Employee Payroll Form</h3>
+    <form>
+      <!-- Name -->
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input id="name" type="text" />
+      </div>
+
+      <!-- Profile Image -->
+      <div class="form-group">
+        <label>Profile image</label>
+        <div class="profile-images">
+          <label *ngFor="let image of profileImages">
+            <input type="radio" name="profileImage" />
+            <img [src]="image" alt="Profile" />
+          </label>
+        </div>
+      </div>
+
+      <!-- Gender -->
+      <div class="form-group">
+        <label>Gender</label>
+        <label><input type="radio" name="gender" /> Male</label>
+        <label><input type="radio" name="gender" /> Female</label>
+      </div>
+
+      <!-- Department -->
+      <div class="form-group">
+        <label>Department</label>
+        <label><input type="checkbox" /> HR</label>
+        <label><input type="checkbox" /> Sales</label>
+        <label><input type="checkbox" /> Finance</label>
+        <label><input type="checkbox" /> Engineer</label>
+        <label><input type="checkbox" /> Others</label>
+      </div>
+
+      <!-- Salary -->
+      <div class="form-group salary-group">
+        <label>Salary</label>
+        <select>
+          <option value="" disabled selected>Select Salary</option>
+          <option *ngFor="let salary of salaryOptions" [value]="salary">{{ salary }}</option>
+        </select>
+      </div>
+
+      <!-- Start Date -->
+      <div class="form-group date-group">
+        <label>Start Date</label>
+        <select>
+          <option value="" disabled selected>Day</option>
+          <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+        </select>
+        <select>
+          <option value="" disabled selected>Month</option>
+          <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+        </select>
+        <select>
+          <option value="" disabled selected>Year</option>
+          <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+        </select>
+      </div>
+
+      <!-- Notes -->
+      <div class="form-group">
+        <label>Notes</label>
+        <textarea></textarea>
+      </div>
+
+      <!-- Buttons -->
+      <div class="button-group">
+        <button type="button" class="cancel" (click)="navigateToHome()">Cancel</button>
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+      </div>
+    </form>
+  </div>
+</div>
