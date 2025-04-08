@@ -12,11 +12,11 @@
 
   <div class="form-container">
     <h3>Employee Payroll Form</h3>
-    <form>
+    <form  [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <!-- Name -->
       <div class="form-group">
         <label for="name">Name</label>
-        <input id="name" type="text" />
+        <input id="name" type="text"  formControlName="name"/>
       </div>
 
       <!-- Profile Image -->
@@ -24,7 +24,7 @@
         <label>Profile image</label>
         <div class="profile-images">
           <label *ngFor="let image of profileImages">
-            <input type="radio" name="profileImage" />
+            <input type="radio" name="imagePath"  [value]="image" formControlName="imagePath" />
             <img [src]="image" alt="Profile" />
           </label>
         </div>
@@ -33,24 +33,24 @@
       <!-- Gender -->
       <div class="form-group">
         <label>Gender</label>
-        <label><input type="radio" name="gender" /> Male</label>
-        <label><input type="radio" name="gender" /> Female</label>
+        <label><input type="radio" name="gender"  value="Male" formControlName="gender"/> Male</label>
+        <label><input type="radio" name="gender"  value="Female" formControlName="gender"/> Female</label>
       </div>
 
       <!-- Department -->
       <div class="form-group">
         <label>Department</label>
-        <label><input type="checkbox" /> HR</label>
-        <label><input type="checkbox" /> Sales</label>
-        <label><input type="checkbox" /> Finance</label>
-        <label><input type="checkbox" /> Engineer</label>
-        <label><input type="checkbox" /> Others</label>
+        <label><input type="radio" value="HR" formControlName="department" /> HR</label>
+        <label><input type="radio" value="Sales" formControlName="department"/> Sales</label>
+        <label><input type="radio" value="Finance" formControlName="department"/> Finance</label>
+        <label><input type="radio" value="Engineer" formControlName="department"/> Engineer</label>
+        <label><input type="radio" value="Others" formControlName="department"/> Others</label>
       </div>
 
       <!-- Salary -->
       <div class="form-group salary-group">
         <label>Salary</label>
-        <select>
+        <select formControlName="salary">
           <option value="" disabled selected>Select Salary</option>
           <option *ngFor="let salary of salaryOptions" [value]="salary">{{ salary }}</option>
         </select>
@@ -59,15 +59,15 @@
       <!-- Start Date -->
       <div class="form-group date-group">
         <label>Start Date</label>
-        <select>
+        <select  formControlName="day" (change)="onDateChange()">
           <option value="" disabled selected>Day</option>
           <option *ngFor="let day of days" [value]="day">{{ day }}</option>
         </select>
-        <select>
+        <select  formControlName="month" (change)="onDateChange()">
           <option value="" disabled selected>Month</option>
           <option *ngFor="let month of months" [value]="month">{{ month }}</option>
         </select>
-        <select>
+        <select formControlName="year" (change)="onDateChange()">
           <option value="" disabled selected>Year</option>
           <option *ngFor="let year of years" [value]="year">{{ year }}</option>
         </select>
@@ -76,7 +76,7 @@
       <!-- Notes -->
       <div class="form-group">
         <label>Notes</label>
-        <textarea></textarea>
+        <textarea formControlName="notes"></textarea>
       </div>
 
       <!-- Buttons -->

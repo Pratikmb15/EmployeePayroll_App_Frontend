@@ -1,5 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { EmployeesService } from '../../Services/Employee/employees.service';
+
+interface Employee{
+  id:number,
+  name: string,
+  gender: string,
+  department: string,
+  salary: number,
+  startDate:  Date,
+  imagePath: string,
+  notes: string
+}
+
+
 
 
 @Component({
@@ -8,8 +22,12 @@ import { Router } from '@angular/router';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
-export class DashboardComponent {
-  constructor(private router: Router){}
+export class DashboardComponent implements OnInit {
+  Employees:Employee[]=[]
+  constructor(private router: Router,private employeesService:EmployeesService){}
+  ngOnInit(): void {
+   this.fetchEmployees();
+  }
   departments=['Sales', 'HR', 'Finance'];
   employees = [
     {
@@ -33,4 +51,32 @@ export class DashboardComponent {
   navigateTo() {
     this.router.navigate(['/Register']);
   }
+
+  fetchEmployees(){
+    this.employeesService.getEmployees().subscribe({ next: (res: any) => {
+      console.log('Employees Fetched successfully', res);
+      this.Employees=res.data;
+    },
+    error: (err) => {
+      console.error('Error Fetching Employees :', err);
+
+    }})
+  }
+  onDelete(emp:Employee){
+    console.log('id :',emp.id);
+    
+       const id= Number(emp.id);
+    
+    return this.employeesService.deleteEmployee(id).subscribe({
+      next: (res:any) => {
+        console.log('Employee Deleted Successfully',res);
+      },
+      error:(err)=> {
+        console.error('Error Deleting Employee :' ,err);
+        if(err.error){
+          console.error('Server Response :',err.error);
+        }
+      }
+    })
+    }
 }

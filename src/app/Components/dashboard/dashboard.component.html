@@ -37,7 +37,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let employee of employees">
+          <tr *ngFor="let employee of Employees">
             <td>
               <div class="user-info">
                 <img [src]="employee.imagePath" alt="avatar" class="avatar" />
@@ -52,7 +52,7 @@
             <td>{{ employee.startDate | date:'dd MMM yyyy' }}</td>
             <td class="action-icons">
                              
-                <span class="material-symbols-outlined action-icon">delete</span>
+                <span class="material-symbols-outlined action-icon" (click)="onDelete(employee)">delete</span>
             
                 <span class="material-symbols-outlined action-icon">edit</span>         
               </td>             
