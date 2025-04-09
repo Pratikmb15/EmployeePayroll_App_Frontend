@@ -9,56 +9,56 @@
       <h2 class="second-h2">PAYROLL</h2>
     </div>
   </header>
-  
-    <div class="content">
-        <div class="top-bar">
-          <h3>Employee Details</h3>
-        <div class="search-wrapper">
-          <!-- <input type="text" placeholder="Search..." /> -->
-          <button class="search-btn">
-            <span class="material-symbols-outlined">search</span>
-          </button>
-        </div>
-        <button class="add-user-btn" (click)="navigateTo()">
-            <span class="material-symbols-outlined">add</span>
-                 Add User
+
+  <div class="content">
+    <div class="top-bar">
+      <h3>Employee Details</h3>
+      <div class="search-wrapper">
+        <input type="text" placeholder="Search..." [(ngModel)]="searchTerm" (input)="filterEmployees()" />
+        <button class="search-btn">
+          <span class="material-symbols-outlined" >search</span>
         </button>
+
       </div>
-  
-      <table class="employee-table">
-        <thead>
-          <tr>
-            <th>NAME</th>
-            <th>GENDER</th>
-            <th>DEPARTMENT</th>
-            <th>SALARY</th>
-            <th>START DATE</th>
-            <th>ACTIONS</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let employee of Employees">
-            <td>
-              <div class="user-info">
-                <img [src]="employee.imagePath" alt="avatar" class="avatar" />
-                <span>{{ employee.name }}</span>
-              </div>
-            </td>
-            <td>{{ employee.gender }}</td>
-            <td>
-              <span *ngFor="let dept of departments" class="badge">{{ dept }}</span>
-            </td>
-            <td>₹ {{ employee.salary | number }}</td>
-            <td>{{ employee.startDate | date:'dd MMM yyyy' }}</td>
-            <td class="action-icons">
-                             
-                <span class="material-symbols-outlined action-icon" (click)="onDelete(employee)">delete</span>
-            
-                <span class="material-symbols-outlined action-icon" (click)="navigateToUpdate(employee.id) ">edit</span>         
-              </td>             
-          </tr>
-        </tbody>
-      </table>
+      <button class="add-user-btn" (click)="navigateTo()">
+        <span class="material-symbols-outlined">add</span>
+        Add User
+      </button>
     </div>
+
+    <table class="employee-table">
+      <thead>
+        <tr>
+          <th>NAME</th>
+          <th>GENDER</th>
+          <th>DEPARTMENT</th>
+          <th>SALARY</th>
+          <th>START DATE</th>
+          <th>ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of filteredEmployees">
+          <td>
+            <div class="user-info">
+              <img [src]="employee.imagePath" alt="avatar" class="avatar" />
+              <span>{{ employee.name }}</span>
+            </div>
+          </td>
+          <td>{{ employee.gender }}</td>
+          <td>
+            <span *ngFor="let dept of departments" class="badge">{{ dept }}</span>
+          </td>
+          <td>₹ {{ employee.salary | number }}</td>
+          <td>{{ employee.startDate | date:'dd MMM yyyy' }}</td>
+          <td class="action-icons">
+
+            <span class="material-symbols-outlined action-icon" (click)="onDelete(employee)">delete</span>
+
+            <span class="material-symbols-outlined action-icon" (click)="navigateToUpdate(employee.id) ">edit</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  
+</div>

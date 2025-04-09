@@ -22,30 +22,17 @@ interface Employee{
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements OnInit {
+  searchTerm = '';
+  filteredEmployees: Employee[] = [];
   Employees:Employee[]=[]
+
   constructor(private router: Router,private employeesService:EmployeesService){}
   ngOnInit(): void {
    this.fetchEmployees();
+   
   }
   departments=['Sales', 'HR', 'Finance'];
-  employees = [
-    {
-      name: 'Amarpa Shashanka Keerthi Kumar',
-      gender: 'Female',
-      departments: ['Sales', 'HR', 'Finance'],
-      salary: 10000,
-      startDate: new Date('2019-10-29'),
-      imagePath: 'https://randomuser.me/api/portraits/women/1.jpg'
-    },
-    {
-      name: 'Mohammad Salman Iqbal Shaikh',
-      gender: 'Female',
-      departments: ['Sales', 'HR', 'Finance'],
-      salary: 10000,
-      startDate: new Date('2019-10-29'),
-      imagePath: 'https://randomuser.me/api/portraits/women/2.jpg'
-    }
-  ];
+
 
   navigateTo() {
     this.router.navigate(['/Register']);
@@ -59,11 +46,26 @@ export class DashboardComponent implements OnInit {
     this.employeesService.getEmployees().subscribe({ next: (res: any) => {
       console.log('Employees Fetched successfully', res);
       this.Employees=res.data;
+      this.filteredEmployees=[...this.Employees];
     },
     error: (err) => {
       console.error('Error Fetching Employees :', err);
 
     }})
+  }
+  filterEmployees() {
+    if (!this.searchTerm) {
+      this.filteredEmployees = [...this.Employees];
+      return;
+    }
+
+    const searchText = this.searchTerm.toLowerCase();
+    this.filteredEmployees = this.Employees.filter(employee => 
+      employee.name.toLowerCase().includes(searchText) ||
+      employee.department.toLowerCase().includes(searchText) ||
+      employee.gender.toLowerCase().includes(searchText) ||
+      employee.salary.toString().includes(searchText)
+    );
   }
   onDelete(emp:Employee){
     console.log('id :',emp.id);
