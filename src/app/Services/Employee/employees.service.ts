@@ -30,6 +30,17 @@ export class EmployeesService  {
     return this.httpService.getService('https://localhost:5001/api/Employee',false, header);
   }
 
+  getEmployeeById(id:any){
+    let header = {
+      headers: new HttpHeaders(
+        {
+          'Content-type': 'application/json'
+        }
+      )
+    }
+    return this.httpService.getService(`https://localhost:5001/api/Employee/${id}`,false, header);
+  }
+
   updateEmployee(reqData:any,id:any){
     let header = {
       headers: new HttpHeaders(

@@ -15,7 +15,6 @@ interface Employee{
 
 
 
-
 @Component({
   selector: 'app-dashboard',
   standalone: false,
@@ -51,6 +50,10 @@ export class DashboardComponent implements OnInit {
   navigateTo() {
     this.router.navigate(['/Register']);
   }
+  navigateToUpdate(id:number) {
+    this.router.navigate([`/Register/${id}`]);
+
+  }
 
   fetchEmployees(){
     this.employeesService.getEmployees().subscribe({ next: (res: any) => {
@@ -70,6 +73,7 @@ export class DashboardComponent implements OnInit {
     return this.employeesService.deleteEmployee(id).subscribe({
       next: (res:any) => {
         console.log('Employee Deleted Successfully',res);
+        this.fetchEmployees();
       },
       error:(err)=> {
         console.error('Error Deleting Employee :' ,err);
