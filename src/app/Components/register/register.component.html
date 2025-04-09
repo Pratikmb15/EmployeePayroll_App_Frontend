@@ -1,10 +1,10 @@
 <div class="dashboard-container">
-  <header class="header">
-    <div class="logo-container">
+  <header class="header" >
+    <div class="logo-container" (click)="navigateToHome()" >
       <span class="material-symbols-outlined person-icon">person</span>
       <span class="material-symbols-outlined money-icon">attach_money</span>
     </div>
-    <div class="title-container">
+    <div class="title-container" (click)="navigateToHome()">
       <h2>EMPLOYEE</h2>
       <h2 class="second-h2">PAYROLL</h2>
     </div>
@@ -15,6 +15,7 @@
     <form  [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <!-- Name -->
       <div class="form-group">
+        
         <label for="name">Name</label>
         <input id="name" type="text"  formControlName="name"/>
       </div>
@@ -27,7 +28,7 @@
             <input type="radio" name="imagePath"  [value]="image" formControlName="imagePath" />
             <img [src]="image" alt="Profile" />
           </label>
-        </div>
+        </div>  
       </div>
 
       <!-- Gender -->

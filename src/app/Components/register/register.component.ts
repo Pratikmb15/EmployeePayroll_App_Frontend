@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { EmployeesService } from '../../Services/Employee/employees.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 
 interface Employee {
@@ -43,7 +45,8 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private formbuild: FormBuilder,
-    private employeesService: EmployeesService
+    private employeesService: EmployeesService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -137,6 +140,7 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
   
+  
     const reqData = {
 
       name: this.registerForm.value.name,
@@ -153,10 +157,12 @@ export class RegisterComponent implements OnInit {
       this.employeesService.updateEmployee(reqData, id).subscribe({
         next: (res: any) => {
           console.log('Employee updated successfully', res);
+          this.snackBar.open('Employee updated successfully', 'Close', { duration: 3000 });
           this.navigateToHome();
         },
         error: (err) => {
           console.error('Error updating employee:', err);
+          this.snackBar.open('Failed Updating Employee ', 'Close', { duration: 3000 });
           if (err.error) {
             console.error('Server Response:', err.error);
           }
@@ -166,11 +172,13 @@ export class RegisterComponent implements OnInit {
     this.employeesService.addEmployee(reqData).subscribe({
       next: (res: any) => {
         console.log('Employee registered successfully', res);
+        this.snackBar.open('Employee registered successfully', 'Close', { duration: 3000 });
         this.navigateToHome();
   
       },
       error: (err) => {
         console.error('Error registering Employees :', err);
+        this.snackBar.open('Failed registering Employee ', 'Close', { duration: 3000 });
         if (err.error) {
           console.error('Server Response:', err.error);
         }

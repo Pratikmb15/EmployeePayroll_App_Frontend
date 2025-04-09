@@ -7,6 +7,9 @@ import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 
 
@@ -22,7 +25,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    MatFormFieldModule,
+    MatInputModule
+    
   ],
   providers: [
     provideClientHydration(withEventReplay())
